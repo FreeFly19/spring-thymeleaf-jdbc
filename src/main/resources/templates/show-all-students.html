@@ -1,0 +1,23 @@
+<h1>Here should be list of students</h1>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Average mark</th>
+    </tr>
+
+    <tr th:each="student: ${students}">
+        <td th:text="${student.getName()}"></td>
+        <td th:text="${student.getAge()}"></td>
+        <td th:text="${student.getAvgMark()}"></td>
+    </tr>
+</table>
+
+
+<form action="/create" method="post">
+    <input name="age"/><br/>
+    <input name="name"/><br/>
+    <input name="avgMark"/><br/>
+    <button>Send</button>
+</form>

@@ -13,9 +13,4 @@ public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class);
     }
-
-    @GetMapping("/test")
-    public String test() throws IOException {
-        return "index.html";
-    }
 }

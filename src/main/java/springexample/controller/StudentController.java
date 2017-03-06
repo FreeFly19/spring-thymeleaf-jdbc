@@ -1,6 +1,7 @@
 package springexample.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,24 +16,10 @@ public class StudentController {
     private StudentDao studentDao = new StudentDao();
 
     @GetMapping("")
-    @ResponseBody
-    public String homePage() throws IOException {
-        List<Student> students = studentDao.getAllStudents();
-
-        String html = "";
-        for (Student student : students) {
-            html += student.getAge() + "<br>";
-            html += student.getName() + "<br>";
-            html += student.getAvgMark() + "<br><br>";
-        }
-
-        html += "<form action=\"/create\" method=\"post\">" +
-                "<input name=\"age\"><br>" +
-                "<input name=\"name\"><br>" +
-                "<input name=\"avgMark\"><br>" +
-                "<button>Send</button>" +
-                "</form>";
-        return html;
+    public String homePage(Model model) throws IOException {
+        List<Student> studentList = studentDao.getAllStudents();
+        model.addAttribute("students", studentList);
+        return "show-all-students";
     }
 
     @PostMapping("/create")
